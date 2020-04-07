@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <el-button>默认按钮</el-button>
+  <div class="app">
     <router-view></router-view>
   </div>
 </template>
@@ -9,4 +8,6 @@
 export default {};
 </script>
 
-<style></style>
+<style>
+@import url(~@/style/base.css);
+</style>
