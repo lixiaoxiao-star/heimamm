@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <!-- 引入组件库 -->
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script>
+    window.onload = function () {
+      let app = new Vue({
+        el: '#app',
+        data: {
+
+        }
+      })
+    }
+  </script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .box {
+      height: 30px;
+      border: 1px solid red;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 行:el-row
+       列:el-col     span属性代表烂数,是number雷兴国,一行最多24栏
+       栅栏是24栏 -->
+
+  <div id="app">
+    <el-row>
+      <el-col class="box" :span="20">
+        <el-input placeholder="请输入验证码" prefix-icon="el-icon-key" v-model="input"></el-input>
+      </el-col>
+      <el-col class="box" :span="4"></el-col>
+    </el-row>
+  </div>
+</body>
+
+</html>

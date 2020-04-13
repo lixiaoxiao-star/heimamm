@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <!-- 引入组件库 -->
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script>
+
+    /* 
+    el-form:整个表单
+    lable-width整个表单下面所有的标题的宽度
+    model:绑定值,就是绑定整个表单的值
+    el-form-ierm 是表单元素的每一项,lable属性就是该项的标题
+      
+    rules绑定验证规则:
+    rules:{
+      名字:[]  //后面是一个数组
+      名字(该名字来自于el-form-item里面的prop属性的值,它一定要是表单元素v-model的值)
+      例:el-form-item下的表单元素的v-model="rulesForm.name"  那么el-form-item下的prop一定要是name
+      需要验证的子项才写prop
+      验证规则参数说明
+      {required:true,message:"请输入活动名称",  trigger:"blur "  } 
+        required:true                    //是否必填,如果没填就报错误信息,message的值
+        message:"请输入活动名称",         //错误提示信息
+        trigger:"blur "                 //在什么情况下触发这个验证,有第二个值供我们选择  blur失去焦点   change值改变的时候触发
+     
+      {min:3, max:5, essage:"长度3到5个字符", trigger:"blur"}
+       min:最小长度 max:最大长度
+    }
+    
+    
+    
+    
+    */
+    window.onload = function () {
+      let app = new Vue({
+        el: '#app',
+        data: {
+          ruleForm: {
+            name: '',
+            phone: "",
+          },
+          rules: {
+            name: [
+              { required: true, message: '请输入活动名称', trigger: 'blur' },
+              { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+            ],
+            phone: [
+              { required: true, message: "请输入手机号", trigger: 'blur' },
+              { min: 5, max: 11, message: "请输入正确的手机号", trigger: "blur" }
+            ]
+          }
+        },
+
+      })
+    }
+
+  </script>
+</head>
+
+<body>
+
+  <div id="app">
+    <el-form :model="ruleForm" :rules="rules" label-width="150px">
+      <el-form-item label="活动名称" prop="name">
+        <el-input v-model="ruleForm.name"></el-input>
+      </el-form-item>
+      <el-form-item label="请输入手机号" prop="phone">
+        <el-input v-model="ruleForm.phone"></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-button>立即创建</el-button>
+        <el-button>重置</el-button>
+      </el-form-item>
+    </el-form>
+  </div>
+</body>
+
+
+
+
+</html>

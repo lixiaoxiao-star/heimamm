@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <!-- 引入组件库 -->
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script>
+    window.onload = function () {
+      let app = new Vue({
+        el: '#app',
+        data: {
+          input: "",
+          password: "",
+        }
+      })
+    }
+  </script>
+</head>
+
+<body>
+  <!-- prefix-icon输入框头部图标 
+  el-icon-user  等于图标,直接element官网复制 -->
+  <!-- show-password="true"是一个字符串形式,加上v-bind:简写就是:转成js代码,就会编译成布偶值,如果v-bind里面需要是字符串就要再加一个引号v-bind='"true"' -->
+  <div id="app">
+    <el-input placeholder="请输入用户名" prefix-icon="el-icon-user" v-model="input"></el-input>
+    <el-input placeholder="请输入密码" prefix-icon="el-icon-lock" :show-password="true" v-model="password"></el-input>
+  </div>
+</body>
+
+</html>
