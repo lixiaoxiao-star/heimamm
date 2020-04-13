@@ -53,19 +53,27 @@
             >登录</el-button
           >
           <br />
-          <el-button class="btn" type="primary">注册</el-button>
+          <el-button class="btn" type="primary" @click="registerClick"
+            >注册</el-button
+          >
         </el-form-item>
       </el-form>
     </div>
     <div class="rigth">
       <img src="../../assets/img/login_banner_ele.png" alt="" />
     </div>
+
+    <register ref="registerRef"> </register>
   </div>
 </template>
 
 <script>
+import register from './register.vue';
 export default {
   name: 'login',
+  components: {
+    register
+  },
   data() {
     return {
       form: {
@@ -90,6 +98,11 @@ export default {
     };
   },
   methods: {
+    // 注册点击
+    registerClick() {
+      this.$refs.registerRef.dialogFormVisible = true;
+    },
+    // 登陆点击
     loginClick() {
       this.$refs.formRef.validate((result) => {
         this.$message.success(result + ''); //布尔值转字符串
