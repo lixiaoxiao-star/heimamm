@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <!-- 引入组件库 -->
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script>
+
+
+    window.onload = function () {
+      let app = new Vue({
+        el: '#app',
+        data: {
+
+          age: "",
+
+          rules: {
+            age: [
+              {
+                validator: (rule, value, callback) => {
+                  if (value == "") {
+                    callback("不能为空哦")
+                  } else if (value < 18) {
+                    callback("年龄太小,回去学习")
+                  } else {
+                    callback("验证成功")
+                  }
+                }, trigger: "blur"
+              }
+            ]
+          }
+        },
+
+      })
+    }
+
+  </script>
+</head>
+
+<body>
+
+  <div id="app">
+    <el-form label-width="50px" :rules="rules">
+      <el-form-item label="年龄" prop="age">
+        <el-input v-model="age"></el-input>
+      </el-form-item>
+    </el-form>
+  </div>
+</body>
+
+
+
+
+</html>
