@@ -3,64 +3,59 @@
   <div class="login">
     <div class="left">
       <div class="title">
-        <span
-          ><img src="../../assets/img/矢量智能对象 拷贝 9.png" alt=""
-        /></span>
+        <span><img src="../../assets/img/矢量智能对象 拷贝 9.png"
+               alt="" /></span>
         <span class="titleName">黑马面面</span>
         <span class="titleline">|</span>
         <span class="titleName1"> 用户登录</span>
       </div>
-      <el-form :model="form" :rules="rules" ref="formRef">
+      <el-form :model="form"
+               :rules="rules"
+               ref="formRef">
         <el-form-item prop="phone">
-          <el-input
-            prefix-icon="el-icon-user-solid"
-            placeholder="请输入手机号"
-            v-model="form.phone"
-          ></el-input>
+          <el-input prefix-icon="el-icon-user-solid"
+                    placeholder="请输入手机号"
+                    v-model="form.phone"></el-input>
         </el-form-item>
         <el-form-item prop="password">
-          <el-input
-            :show-password="true"
-            prefix-icon="el-icon-unlock"
-            placeholder="请输入密码"
-            v-model="form.password"
-          ></el-input>
+          <el-input :show-password="true"
+                    prefix-icon="el-icon-unlock"
+                    placeholder="请输入密码"
+                    v-model="form.password"></el-input>
         </el-form-item>
         <el-form-item prop="code">
           <el-row>
             <el-col :span="18">
-              <el-input
-                prefix-icon="el-icon-key"
-                placeholder="请输入验证码"
-                v-model="form.code"
-              ></el-input>
+              <el-input prefix-icon="el-icon-key"
+                        placeholder="请输入验证码"
+                        v-model="form.code"></el-input>
             </el-col>
             <el-col :span="6">
-              <img :src="codess" alt="" @click="imgclick" class="codeimg" />
+              <img :src="codess"
+                   alt=""
+                   @click="imgclick"
+                   class="codeimg" />
             </el-col>
           </el-row>
         </el-form-item>
         <el-form-item prop="check">
-          <el-checkbox v-model="form.check"
-            >我已阅读并同意<el-link type="primary">用户协议</el-link>和<el-link
-              type="primary"
-              >隐私条款</el-link
-            >
+          <el-checkbox v-model="form.check">我已阅读并同意<el-link type="primary">用户协议</el-link>和<el-link type="primary">隐私条款</el-link>
           </el-checkbox>
         </el-form-item>
         <el-form-item>
-          <el-button class="btn" type="primary" @click="loginClick()"
-            >登录</el-button
-          >
+          <el-button class="btn"
+                     type="primary"
+                     @click="loginClick()">登录</el-button>
           <br />
-          <el-button class="btn" type="primary" @click="registerClick"
-            >注册</el-button
-          >
+          <el-button class="btn"
+                     type="primary"
+                     @click="registerClick">注册</el-button>
         </el-form-item>
       </el-form>
     </div>
     <div class="rigth">
-      <img src="../../assets/img/login_banner_ele.png" alt="" />
+      <img src="../../assets/img/login_banner_ele.png"
+           alt="" />
     </div>
 
     <register ref="registerRef"> </register>
@@ -70,13 +65,13 @@
 <script>
 import register from './register.vue';
 import { tologin } from '../../api/login.js';
-import { setToken} from '../../utils/token.js';
+import { setToken, getToken } from '../../utils/token.js';
 export default {
   name: 'login',
   components: {
     register
   },
-  data() {
+  data () {
     return {
       codess: process.env.VUE_APP_URL + '/captcha?type=login',
       form: {
@@ -126,25 +121,33 @@ export default {
       }
     };
   },
+  created () {
+    // 判断如果登录过了,就直接跳转到主页
+    if (getToken()) {
+      this.$router.push("/home");
+    }
+  },
+
   methods: {
     // 验证码点击切换图片
-    imgclick() {
+    imgclick () {
       this.codess =
         process.env.VUE_APP_URL + '/captcha?type=login&t' + Date.now();
     },
     // 注册点击
-    registerClick() {
+    registerClick () {
       this.$refs.registerRef.dialogFormVisible = true;
     },
     // 登陆点击
-    loginClick() {
+    loginClick () {
       this.$refs.formRef.validate((result) => {
         if (result == true) {
           tologin(this.form).then((res) => {
             this.$message.success('登录成功'); //布尔值转字符串
             console.log(res);
             setToken(res.data.token);
-          });
+            this.$router.push("home")
+          }).catch(err => err);
         }
       });
     }

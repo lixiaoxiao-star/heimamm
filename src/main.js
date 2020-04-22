@@ -11,17 +11,6 @@ Vue.config.productionTip = false;
 
 // 3:注册element
 Vue.use(ElementUI);
-// 注册路由
-// Vue.use(VueRouter);
-
-// const router = new VueRouter({
-//   routes: [
-//     {
-//       path: '/',
-//       component: HelloWorld
-//     }
-//   ]
-// });
 
 new Vue({
   router,

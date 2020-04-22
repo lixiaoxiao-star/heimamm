@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <!-- 引入组件库 -->
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script>
+    window.onload = function () {
+      let app = new Vue({
+        el: '#app',
+        data: {
+          collapse: true
+        },
+      })
+    }
+  </script>
+</head>
+<style>
+  .el-menu-vertical-demo:not(.el-menu--collapse) {
+    width: 160px;
+  }
+</style>
+
+<body>
+  <div id="app">
+    <button @click="collapse=!collapse">点我折叠</button>
+    <el-menu default-active="1" class="el-menu-vertical-demo" @open="handleOpen" :collapse="!collapse"
+      @close="handleClose">
+
+      <el-menu-item index="1">
+        <i class="el-icon-pie-chart"></i>
+        <span slot="title">数据概览</span>
+      </el-menu-item>
+
+      <el-menu-item index="2">
+        <i class="el-icon-user"></i>
+        <span slot="title">用户列表</span>
+      </el-menu-item>
+
+      <el-menu-item index="3">
+        <i class="el-icon-edit-outline"></i>
+        <span slot="title">题库列表</span>
+      </el-menu-item>
+
+      <el-menu-item index="4">
+        <i class="el-icon-office-building"></i>
+        <span slot="title">企业列表</span>
+      </el-menu-item>
+
+      <el-menu-item index="5">
+        <i class="el-icon-notebook-2"></i>
+        <span slot="title">学科列表</span>
+      </el-menu-item>
+
+    </el-menu>
+  </div>
+</body>
+
+</html>

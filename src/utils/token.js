@@ -14,3 +14,5 @@ function removeToken(name = 'token') {
 }
 
 export { setToken, getToken, removeToken };
+
+
