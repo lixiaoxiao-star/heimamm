@@ -20,20 +20,22 @@ const router = new VueRouter({
   routes: [
     {
       path: '/',
-      component: login
+      component: login,
+       meta: { title: '首页' }
+
     },
     {
       path: '/home',
-      redirect: '/home/subject', //设置路由重定向默认跳转到某个页面,就是进入home的时候默认选中第几个
-
+      // redirect: '/home/subject', //设置路由重定向默认跳转到某个页面,就是进入home的时候默认选中第几个
+       meta: { title: '登录页' },
       component: layout, //进入到layout的子组件内,一定会显示layout主组件,因为子组件是依赖主组件存在的
 
       children: [
-        { path: 'chart', component: chart },
-        { path: 'userList', component: userList },
-        { path: 'question', component: question },
-        { path: 'business', component: business },
-        { path: 'subject', component: subject }
+        { path: 'chart', component: chart, meta: { title: '数据概览' } },
+        { path: 'userList', component: userList, meta: { title: '用户列表' } },
+        { path: 'question', component: question, meta: { title: '题库列表' } },
+        { path: 'business', component: business, meta: { title: '企业列表' } },
+        { path: 'subject', component: subject, meta: { title: '学科列表' } }
       ]
     }
   ]
@@ -47,7 +49,8 @@ router.beforeEach((to, from, next) => {
 });
 
 // 进入后拦截
-router.afterEach(() => {
+router.afterEach((to) => {
   NProgress.done(); //进入路由后结束进度条
+  document.title = to.meta.title; //to相当于$route信息
 });
 export default router;
