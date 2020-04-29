@@ -53,7 +53,6 @@ export default {
     },  },
   data () {
     return {
-
       dialogFormVisible: false, //设置对话框显示还是消失
       form: {
         rid: '', //学科编号
