@@ -11,7 +11,8 @@
         <span class="heima">黑马面面</span>
       </div>
       <div class="right">
-        <img class="rightImg" :src="$store.state.userInfo.avatar" alt="" />
+        <!-- <img class="rightImg" :src="$store.state.userInfo.avatar" alt="" /> -->
+        <img class="rightImg" :src="$store.getters.vuexGetUserName" alt="" />
         <span class="rightFont">{{ $store.state.userInfo.username }},你好</span>
         <el-button type="primary" @click="exit"> 退出</el-button>
       </div>
@@ -55,7 +56,7 @@
           </el-menu-item>
         </el-menu>
       </el-aside>
-      <el-main>
+      <el-main class="main">
         <router-view></router-view>
         <!-- 所有的子组件就是为了替换主组件的view的 -->
       </el-main>
@@ -63,7 +64,8 @@
   </el-container>
 </template>
 <script>
-import { getUserInfo, exitLogin } from '@/api/home.js';
+// import { getUserInfo, exitLogin } from '@/api/home.js';
+import { exitLogin } from '@/api/home.js';
 import { removeToken } from '@/utils/token.js';
 import { getToken } from '../../utils/token';
 export default {
@@ -79,14 +81,16 @@ export default {
       this.$router.push('/');
       return;
     }
-    // 调用获取用户信息
-    getUserInfo().then((res) => {
-      this.userInfo = res.data;
-      this.userInfo.avatar =
-        process.env.VUE_APP_URL + '/' + this.userInfo.avatar;
-      // 把用户信息保存到共享数据state里面
-      this.$store.state.userInfo = this.userInfo;
-    });
+    // 调用接口获取用户信息
+    // getUserInfo().then((res) => {
+    //   this.userInfo = res.data;
+    //   this.userInfo.avatar =
+    //     process.env.VUE_APP_URL + '/' + this.userInfo.avatar;
+    //   // 把用户信息保存到共享数据state里面
+    //   // this.$store.state.userInfo = this.userInfo;
+    //   this.$store.commit('setUserInfo', this.userInfo);
+    // });
+    this.$store.dispatch('asyncGetData'); //sispatch  触发actions里面的asyncGetData方法
   },
   methods: {
     // exit () {
@@ -169,6 +173,10 @@ export default {
     .el-menu-vertical-demo:not(.el-menu--collapse) {
       width: 160px;
     }
+  }
+
+  .main {
+    background: rgba(232, 233, 236, 1);
   }
 }
 </style>

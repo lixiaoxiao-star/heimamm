@@ -1,4 +1,4 @@
-import instance from '../utils/request.js';
+import instance from '@/utils/request.js';
 
 function tologin(data) {
   return instance({
